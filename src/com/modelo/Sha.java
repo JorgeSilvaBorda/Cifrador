@@ -34,4 +34,26 @@ public class Sha {
 	byte[] encoded = Base64.getEncoder().encode(digest);
 	return new String(encoded);
     }
+    
+    public String cifrarSha256_Base64(String mensaje) throws NoSuchAlgorithmException {
+	MessageDigest md = MessageDigest.getInstance("SHA-256");
+	md.update(mensaje.getBytes());
+	byte[] digest = md.digest();
+	byte[] encoded = Base64.getEncoder().encode(digest);
+	return new String(encoded);
+    }
+    
+    public String cifrarSha256(String mensaje) throws NoSuchAlgorithmException {
+	MessageDigest md = MessageDigest.getInstance("SHA-256");
+	md.update(mensaje.getBytes());
+	byte[] digest = md.digest();
+
+	// Se escribe byte a byte en hexadecimal
+	StringBuilder sr = new StringBuilder();
+	for (byte b : digest) {
+	    System.out.print(Integer.toHexString(0xFF & b));
+	    sr.append(Integer.toHexString(0xFF & b));
+	}
+	return sr.toString();
+    }
 }
