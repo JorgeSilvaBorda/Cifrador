@@ -24,7 +24,6 @@ public class Sha {
 	byte[] digest = md.digest();
 	StringBuilder str = new StringBuilder();
 	for (byte b : digest) {
-	    System.out.print(Integer.toHexString(0xFF & b));
 	    str.append(Integer.toHexString(0xFF & b));
 	}
 	return str.toString();
@@ -50,11 +49,27 @@ public class Sha {
 	MessageDigest md = MessageDigest.getInstance("SHA-256");
 	md.update(mensaje.getBytes());
 	byte[] digest = md.digest();
-
-	// Se escribe byte a byte en hexadecimal
 	StringBuilder sr = new StringBuilder();
 	for (byte b : digest) {
-	    System.out.print(Integer.toHexString(0xFF & b));
+	    sr.append(Integer.toHexString(0xFF & b));
+	}
+	return sr.toString();
+    }
+    
+    public String cifrarSha512_Base64(String mensaje) throws NoSuchAlgorithmException {
+	MessageDigest md = MessageDigest.getInstance("SHA-512");
+	md.update(mensaje.getBytes());
+	byte[] digest = md.digest();
+	byte[] encoded = Base64.getEncoder().encode(digest);
+	return new String(encoded);
+    }
+    
+    public String cifrarSha512(String mensaje) throws NoSuchAlgorithmException {
+	MessageDigest md = MessageDigest.getInstance("SHA-512");
+	md.update(mensaje.getBytes());
+	byte[] digest = md.digest();
+	StringBuilder sr = new StringBuilder();
+	for (byte b : digest) {
 	    sr.append(Integer.toHexString(0xFF & b));
 	}
 	return sr.toString();
