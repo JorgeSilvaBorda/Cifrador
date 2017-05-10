@@ -20,7 +20,7 @@ public class Sha {
 
     public String cifrarSha1(String mensaje) throws NoSuchAlgorithmException {
 	MessageDigest md = MessageDigest.getInstance("SHA-1");
-	md.update("texto a cifrar".getBytes());
+	md.update(mensaje.getBytes());
 	byte[] digest = md.digest();
 
 	// Se escribe byte a byte en hexadecimal
