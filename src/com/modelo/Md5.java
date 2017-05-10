@@ -27,7 +27,7 @@ public class Md5 {
      */
     public String cifrar(String mensaje) throws NoSuchAlgorithmException {
 	MessageDigest md = MessageDigest.getInstance("MD5");
-	md.update("texto a cifrar".getBytes());
+	md.update(mensaje.getBytes());
 	byte[] digest = md.digest();
 
 	// Se escribe byte a byte en hexadecimal
