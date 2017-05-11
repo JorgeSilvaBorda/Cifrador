@@ -27,17 +27,19 @@ public class Md5 {
      */
     public String cifrar(String mensaje) throws NoSuchAlgorithmException {
 	MessageDigest md = MessageDigest.getInstance("MD5");
-	md.update("texto a cifrar".getBytes());
+	md.update(mensaje.getBytes());
 	byte[] digest = md.digest();
-
-	// Se escribe byte a byte en hexadecimal
+	StringBuilder str = new StringBuilder();
 	for (byte b : digest) {
-	    System.out.print(Integer.toHexString(0xFF & b));
+	    str.append(Integer.toHexString(0xFF & b));
 	}
-	System.out.println();
-
-	// Se escribe codificado base 64. Se necesita la librería
-	// commons-codec-x.x.x.jar de Apache
+	return str.toString();
+    }
+    
+    public String cifrarBase64(String mensaje) throws NoSuchAlgorithmException {
+	MessageDigest md = MessageDigest.getInstance("MD5");
+	md.update(mensaje.getBytes());
+	byte[] digest = md.digest();
 	byte[] encoded = Base64.getEncoder().encode(digest);
 	return new String(encoded);
     }
